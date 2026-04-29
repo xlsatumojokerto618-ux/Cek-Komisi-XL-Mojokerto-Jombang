@@ -154,14 +154,14 @@ select {
         <h3>KALKULATOR KOMISI</h3>
 
         <select id="target" onchange="hitung()">
-            <option value="5000000">5 Penjualan / Bulan</option>
-            <option value="7000000">10 Penjualan / Bulan</option>
-            <option value="10000000">20 Penjualan / Bulan</option>
+            <option value="5">5 Penjualan / Bulan</option>
+            <option value="10">10 Penjualan / Bulan</option>
+            <option value="20">20 Penjualan / Bulan</option>
         </select>
 
         <div class="result-box">
             <p>Estimasi Penghasilan Bulanan</p>
-            <h2 id="hasil">Rp 5.000.000</h2>
+            <h2 id="hasil">Rp 0</h2>
             <p class="small">Estimasi termasuk basic fee + bonus penjualan</p>
         </div>
 
@@ -179,24 +179,48 @@ select {
 </div>
 
 <script>
-// ambil data dari halaman sebelumnya
+// ambil data
 let nama = localStorage.getItem("nama") || "Kamu";
-let kota = localStorage.getItem("kota") || "";
+let kabupaten = localStorage.getItem("kabupaten") || "";
+let role = localStorage.getItem("role") || "OJT";
 
-// tampilkan sapaan
-document.getElementById("halo").innerHTML = `Halo, ${nama} 👋`;
+// sapaan
+document.getElementById("halo").innerHTML = `Halo, ${nama} (${role}) 👋`;
 
 // fungsi hitung
 function hitung() {
-    let value = document.getElementById("target").value;
+    let closing = parseInt(document.getElementById("target").value);
+
+    let komisiPerUnit = 0;
+
+    // beda komisi
+    if (role === "OJT") {
+        komisiPerUnit = 100000;
+    } else if (role === "AE") {
+        komisiPerUnit = 200000;
+    }
+
+    let komisi = closing * komisiPerUnit;
+
+    // bonus
+    let bonus = 0;
+    if (closing >= 20) bonus = 300000;
+    else if (closing >= 10) bonus = 150000;
+
+    let total = komisi + bonus;
+
     document.getElementById("hasil").innerText =
-        "Rp " + parseInt(value).toLocaleString("id-ID");
+        "Rp " + total.toLocaleString("id-ID");
 }
+
+// auto hitung saat load
+hitung();
 
 // WA
 function kirimWA() {
-    let no = "628XXXXXXXXXX"; // GANTI NOMOR KAMU
-    let pesan = `Halo, saya ${nama} dari ${kota}.
+    let no = "6285974511215";
+
+    let pesan = `Halo, saya ${nama} (${role}) dari ${kabupaten}.
 Saya tertarik menjadi Agent XL SATU.`;
 
     window.open(`https://wa.me/${no}?text=${encodeURIComponent(pesan)}`);

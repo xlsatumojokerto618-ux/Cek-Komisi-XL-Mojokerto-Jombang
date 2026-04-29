@@ -17,6 +17,7 @@ body {
     background: linear-gradient(180deg, #0d4f8b, #0a3f70);
     height: 100vh;
     display: flex;
+    flex-direction: column; /* ✅ biar bisa footer */
     justify-content: center;
     align-items: center;
 }
@@ -115,6 +116,14 @@ button {
 button:hover {
     opacity: 0.9;
 }
+
+/* ✅ FOOTER */
+.footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #ddd;
+    text-align: center;
+}
 </style>
 
 </head>
@@ -129,7 +138,7 @@ button:hover {
 
     <h2>Cek Potensi Komisimu!</h2>
     <p class="desc">
-        Masukkan data kamu untuk melihat estimasi penghasilan sebagai Agent XL SATU
+        Masukkan data kamu untuk melihat estimasi penghasilan sebagai Agent XL SATU Mojokerto / Jombang
     </p>
 
     <label>Nama Lengkap <span class="required">*</span></label>
@@ -139,30 +148,44 @@ button:hover {
     <input type="text" id="hp" placeholder="08xx xxxx xxxx">
 
     <label>Kota / Kabupaten <span class="required">*</span></label>
-    <select id="kota">
-        <option value="">-- Pilih Kota --</option>
-        <option>Mojokerto</option>
-        <option>Jombang</option>
+    <select id="kabupaten">
+        <option value="">-- Pilih Kota / Kabupaten --</option>
+        <option>Kabupaten Mojokerto</option>
+        <option>Kabupaten Jombang</option>
+    </select>
+
+    <label>Agent XL Satu<span class="required">*</span></label>
+    <select id="role">
+        <option value="">-- Pilih Agent XL Satu --</option>
+        <option value="OJT">OJT</option>
+        <option value="AE">AE</option>
     </select>
 
     <button onclick="lanjut()">Lihat Estimasi Komisi →</button>
 
 </div>
 
+<!-- ✅ FOOTER PALING BAWAH -->
+<div class="footer">
+    © 2026 Developed by David
+</div>
+
 <script>
 function lanjut() {
     let nama = document.getElementById("nama").value;
     let hp = document.getElementById("hp").value;
-    let kota = document.getElementById("kota").value;
+    let kabupaten = document.getElementById("kabupaten").value;
+    let role = document.getElementById("role").value;
 
-    if (!nama || !hp || !kota) {
+    if (!nama || !hp || !kabupaten || !role) {
         alert("Harap isi semua data!");
         return;
     }
 
     localStorage.setItem("nama", nama);
     localStorage.setItem("hp", hp);
-    localStorage.setItem("kota", kota);
+    localStorage.setItem("kabupaten", kabupaten);
+    localStorage.setItem("role", role);
 
     window.location.href = "hasil.html";
 }
