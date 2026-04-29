@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cek Komisi XL SATU</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: linear-gradient(180deg, #0d4f8b, #0a3f70);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CARD */
+.card {
+    background: #f1f3f6;
+    width: 380px;
+    padding: 30px 25px;
+    border-radius: 30px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+/* LOGO */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.logo-box {
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    color: white;
+    font-weight: bold;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 18px;
+}
+
+.logo-text {
+    font-weight: bold;
+    color: #0d4f8b;
+    font-size: 18px;
+}
+
+/* TITLE */
+h2 {
+    text-align: center;
+    color: #0d4f8b;
+    margin-bottom: 10px;
+}
+
+.desc {
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+/* FORM */
+label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin-top: 12px;
+    display: block;
+}
+
+.required {
+    color: red;
+}
+
+input, select {
+    width: 100%;
+    padding: 13px;
+    margin-top: 6px;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+input::placeholder {
+    color: #9ca3af;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #007bff, #00c6d7);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+    <div class="logo">
+        <div class="logo-box">X</div>
+        <div class="logo-text">XL SATU</div>
+    </div>
+
+    <h2>Cek Potensi Komisimu!</h2>
+    <p class="desc">
+        Masukkan data kamu untuk melihat estimasi penghasilan sebagai Agent XL SATU
+    </p>
+
+    <label>Nama Lengkap <span class="required">*</span></label>
+    <input type="text" id="nama" placeholder="Nama lengkap kamu">
+
+    <label>No. WhatsApp / Telp <span class="required">*</span></label>
+    <input type="text" id="hp" placeholder="08xx xxxx xxxx">
+
+    <label>Kota / Kabupaten <span class="required">*</span></label>
+    <select id="kota">
+        <option value="">-- Pilih Kota --</option>
+        <option>Mojokerto</option>
+        <option>Jombang</option>
+    </select>
+
+    <button onclick="lanjut()">Lihat Estimasi Komisi →</button>
+
+</div>
+
+<script>
+function lanjut() {
+    let nama = document.getElementById("nama").value;
+    let hp = document.getElementById("hp").value;
+    let kota = document.getElementById("kota").value;
+
+    if (!nama || !hp || !kota) {
+        alert("Harap isi semua data!");
+        return;
+    }
+
+    localStorage.setItem("nama", nama);
+    localStorage.setItem("hp", hp);
+    localStorage.setItem("kota", kota);
+
+    window.location.href = "hasil.html";
+}
+</script>
+
+</body>
+</html>
